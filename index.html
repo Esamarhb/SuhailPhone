@@ -19,6 +19,74 @@
             line-height: 1.6;
         }
         
+        /* شريط التنقل العلوي */
+        .navbar {
+            background: linear-gradient(135deg, #013159, #001F3F);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .logo-text {
+            color: #00AEEF;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        /* زر ChatGPT المميز */
+        .ai-btn {
+            background: linear-gradient(135deg, #00AEEF, #4FC3F7);
+            color: #013159;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,174,239,0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .ai-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,174,239,0.4);
+            background: linear-gradient(135deg, #4FC3F7, #00AEEF);
+        }
+        
         header {
             text-align: center;
             padding: 60px 20px 40px;
@@ -259,6 +327,25 @@
         
         /* تحسينات للجوال */
         @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .ai-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
             header {
                 padding: 40px 15px 30px;
             }
@@ -305,6 +392,23 @@
     </style>
 </head>
 <body>
+    <!-- شريط التنقل العلوي مع زر ChatGPT -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="شعار سهيل فون" class="logo-img">
+                <span class="logo-text">سهيل فون</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="chat.html" class="ai-btn">
+                    🤖 ChatGPT مجاني
+                    <span style="font-size: 12px; opacity: 0.9;">جرب الآن!</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <header>
         <img src="logo.png" alt="شعار سهيل فون">
         <h1>سهيل فون</h1>
@@ -358,8 +462,7 @@
         </div>
     </section>
     
-    <section class="reveal">
-        <h2>معلومات التطبيق</h2>
+    <h2>معلومات التطبيق</h2>
         <div class="app-info">
             <div class="info-box"><span>الإصدار:</span> 2.0.79</div>
             <div class="info-box"><span>آخر تحديث:</span> 2026/01/14</div>
@@ -382,6 +485,17 @@
         </div>
     </section>
     
+    <!-- قسم إضافي للذكاء الاصطناعي -->
+    <section class="reveal">
+        <h2>🤖 مساعد الذكاء الاصطناعي</h2>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <p>استخدم مساعد الذكاء الاصطناعي المجاني للإجابة على أسئلتك واستفساراتك</p>
+            <a href="chat.html" class="ai-btn" style="display: inline-flex; margin-top: 15px; padding: 12px 30px;">
+                🤖 ChatGPT مجاني - جرب الآن!
+            </a>
+        </div>
+    </section>
+    
     <footer>
         <div class="footer-content">
             <a class="whatsapp-btn" href="https://wa.me/967777239933" target="_blank">
@@ -389,6 +503,9 @@
             </a>
             <div class="copyright">
                 © 2026 سهيل فون – جميع الحقوق محفوظة
+            </div>
+            <div class="copyright">
+                تم تطوير هذه المدونة بواسطة عصام مرحب 772787874
             </div>
         </div>
     </footer>
@@ -442,6 +559,29 @@
                     r.classList.add('active');
                 }
             });
+            
+            // إضافة زر ChatGPT ديناميكي للجوال
+            if (window.innerWidth <= 768) {
+                const footer = document.querySelector('footer .footer-content');
+                const aiBtn = document.createElement('a');
+                aiBtn.href = 'chat.html';
+                aiBtn.className = 'ai-btn';
+                aiBtn.innerHTML = '🤖 ChatGPT مجاني';
+                aiBtn.style.marginTop = '10px';
+                footer.insertBefore(aiBtn, footer.firstChild);
+            }
+        });
+        
+        // تأثير عند التمرير على شريط التنقل
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, #001F3F, #013159)';
+                navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #013159, #001F3F)';
+                navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+            }
         });
     </script>
 </body>
